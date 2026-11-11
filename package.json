@@ -1,0 +1,15 @@
+{
+  "name": "quality-design-skill",
+  "version": "1.0.0",
+  "private": true,
+  "description": "An example design skill for coding agents, for a fictional app called Acme",
+  "license": "MIT",
+  "author": "John Ma",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "lint:design": "node --experimental-strip-types scripts/design-lint.ts src"
+  }
+}

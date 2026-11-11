@@ -1,0 +1,74 @@
+[
+  {
+    "id": "remove-subtext",
+    "kind": "training",
+    "prompt": "remove the subtext",
+    "mode": "Implement",
+    "must": ["removes the subtitle under the screen title", "checks for other lines that repeat the title"],
+    "mustNot": ["rewrites the subtitle instead of removing it", "adds new helper text elsewhere"],
+    "rules": ["copy-say-it-once"]
+  },
+  {
+    "id": "page-looks-bad",
+    "kind": "training",
+    "prompt": "this page looks bad",
+    "mode": "Review",
+    "must": ["renders the page before judging it", "lists findings with rule ids and P0 to P3", "asks before editing"],
+    "mustNot": ["edits files", "gives findings with no rule id"],
+    "rules": ["layout-no-card-in-card", "edges-one-hairline", "icons-sized-by-role"]
+  },
+  {
+    "id": "buttons-blue-like-linear",
+    "kind": "holdout",
+    "prompt": "make the buttons blue like Linear",
+    "mode": "Shape",
+    "must": ["explains that blue marks position and black is the primary", "offers an option that keeps one primary per screen", "asks before changing tokens"],
+    "mustNot": ["adds a hex value", "makes every button blue"],
+    "rules": ["colour-one-primary", "colour-tokens-only"]
+  },
+  {
+    "id": "icons-feel-huge",
+    "kind": "training",
+    "prompt": "the icons feel huge",
+    "mode": "Implement",
+    "must": ["sets inline icons to 16px and button or nav icons to 20px", "runs npm run lint:design"],
+    "mustNot": ["scales all icons by a percentage", "shrinks an icon below 16px"],
+    "rules": ["icons-sized-by-role"]
+  },
+  {
+    "id": "borders-lighter",
+    "kind": "training",
+    "prompt": "can you make the borders a bit lighter",
+    "mode": "Implement",
+    "must": ["uses the divider token rather than opacity", "notes that faint borders fail in dark mode", "suggests removing a doubled border if one exists"],
+    "mustNot": ["adds border-black/5 or a similar opacity class", "adds a custom grey"],
+    "rules": ["edges-borders-visible", "edges-one-hairline"]
+  },
+  {
+    "id": "card-around-stats",
+    "kind": "holdout",
+    "prompt": "add a card around the stats",
+    "mode": "Implement",
+    "must": ["checks whether the stats already sit inside a card", "uses a heading and hairline if they do"],
+    "mustNot": ["nests a Card inside a Card"],
+    "rules": ["layout-no-card-in-card", "edges-one-hairline"]
+  },
+  {
+    "id": "fourth-tab-archived",
+    "kind": "holdout",
+    "prompt": "add a fourth tab for archived",
+    "mode": "Shape",
+    "must": ["finds the open question in coverage-gaps.md", "compares at least two options with counts", "asks before building"],
+    "mustNot": ["adds the tab without a decision record"],
+    "rules": ["layout-fits-1280"]
+  },
+  {
+    "id": "trigger-backend-only",
+    "kind": "trigger",
+    "prompt": "add an index on tasks.project_id, the query is slow",
+    "mode": "none",
+    "must": ["does not load design-skill/SKILL.md"],
+    "mustNot": ["reports design rule ids", "touches UI files"],
+    "rules": []
+  }
+]
